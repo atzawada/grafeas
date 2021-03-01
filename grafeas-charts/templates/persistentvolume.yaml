@@ -1,0 +1,16 @@
+{{ if .Values.persistence.volume.enabled }}
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: {{ include "grafeas.fullname" . }}
+  labels:
+    type: local
+spec:
+  storageClassName: {{ .Values.persistence.storageClassName }}
+  capacity:
+    storage: {{ .Values.persistence.volumeSize }}
+  accessModes:
+    - {{ .Values.persistence.accessMode }}
+  hostPath:
+    path: "/var/grafeas"
+{{ end }}

@@ -30,12 +30,27 @@ container:
 ##
 persistence:
   enabled: false
+  volume:
+    enabled: false # Will create the pv if set to true
+  claim:
+    enabled: false # Will create the pvc if set to true
   # The name of persistent volume to use
   # persistent volume is used for storing the embedded grafeas data
   claimName: "grafeas"
   # The type of storage used, supported options: memstore or embedded
   # REMARK: embedded storage requires a persistent volume
   storageType: "memstore"
+  storageClassName: manual
+  claimSize: 3Gi
+  volumeSize: 10Gi
+  accessMode: ReadWriteOnce
+
+ingress:
+  enabled: false
+  annotations: {}
+  host: chart-example.local
+  path: "/*"
+  tls: false
 
 # Certificates for mutual authentication
 certificates:

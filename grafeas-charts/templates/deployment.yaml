@@ -70,10 +70,16 @@ spec:
 {{- end }}
 {{- if .Values.persistence.enabled }}
 {{- if eq .Values.persistence.storageType "embedded" }}
+{{ if .Values.persistence.claim.enabled }}
+        - name: persistent-volume
+          persistentVolumeClaim:
+            claimName: {{ include "grafeas.fullname" . }}
+{{ else }}
         - name: persistent-volume
           persistentVolumeClaim:
             claimName: {{ .Values.persistence.claimName }}
-{{- end}}
+{{ end }}
+{{- end }}
 {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
