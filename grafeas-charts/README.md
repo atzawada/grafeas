@@ -120,8 +120,6 @@ The following table lists the configurable parameters of the Grafeas chart and t
 | `image.pullPolicy`                            | Image pull policy                         | `IfNotPresent`                               |
 | `nameOverride`                                | App name                                  | `grafeas-server`                             |
 | `fullnameOverride`                            | App name                                  | `grafeas-server`                             |
-| `persistentVolumeClaimName`                   | The name of persistent volume             | `grafeas`                                    |
-| `storageType`                                 | The type of storage used, supported options: memstore or embedded | `memstore`           |
 | `service.type`                                | Kubernetes Service type                   | `ClusterIP`                                  |
 | `service.port`                                | Kubernetes Service port                   | `8080`                                       |
 | `container.port`                              | Grafeas container port                    | `8080`                                       |
@@ -142,5 +140,18 @@ The following table lists the configurable parameters of the Grafeas chart and t
 | `readinessprobe.periodSeconds`                | Readiness probe period seconds            | `10`                                         |
 | `readinessprobe.failureThreshold`             | Readiness probe failure threshold         | `3`                                          |
 | `nodeSelector`                                | Node labels for pod assignment            | `{}`                                         |
-| `tolerations`                                 | Toleration labels for pod assignment	  | `[]`                                         |
+| `tolerations`                                 | Toleration labels for pod assignment	    | `[]`                                         |
 | `affinity`                                    | Affinity settings for pod assignment      | `{}`                                         |
+| `persistence.enabled`                         | Enables persistent datastore              | `false`                                      |
+| `persistence.claim.enabled`                   | Enables creation of a PVC by the chart    | `false`                                      |
+| `persistence.claim.name`                      | The name of an existing PVC to use        | `grafeas`                                    |
+| `persistence.storageClassName`                | Storage class to use when creating PV     | `manual`                                     |
+| `persistence.accessMode`                      | Access mode for the PV                    | `ReadWriteOnce`                              |
+| `persistence.claimSize`                       | Size of the PVC                           | `3Gi`                                        |
+| `persistence.volumeSize`                      | Size of the PV                            | `10Gi`                                       |
+| `persistence.storageType`                     | The type of storage used, supported options: memstore or embedded | `memstore`           |
+| `ingress.enabled`                             | Enables ingress creation                  | `false`                                      |
+| `ingress.annotations`                         | Annotations to attach to the ingress      | `{}`                                         |
+| `ingress.tls`                                 | Enable TLS on ingress                     | `false`                                      |
+| `ingress.host`                                | DNS host for the ingress to map to        | `chart-example.local`                        |
+| `ingress.path`                                | Route path to match to ingress            | `/*`                                         |
